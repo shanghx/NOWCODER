@@ -1,0 +1,32 @@
+//*借鉴别人的算法
+//思路：用CurSum保存当前连续数组的和，用maxSum保存当前最大的连续数组和
+//每次比较，若curSum大于maxSum，则更新当前的maxSum，
+//当前curSum值如果小于0，那么它再加上下一新个元素时，
+//加完的curSum肯定比下个数组元素小，所以此时在加新元素之前，先将当前的curSum赋值为0，
+//让他从新的元素开始重新找*/
+
+//注意:不能写数组，如果是给数组的元素赋值，进行结算，编译不通过，具体原因还不清楚
+
+
+#include<iostream>
+using namespace std;
+int main()
+{
+
+    int curSum=0,maxSum=-100000;
+    int  n =0,a[n];
+       cin>>n;
+     int x=0;
+      for( int i=0;i<n;i++)
+      {
+          cin>>x;
+          curSum+=x;
+        if(curSum>maxSum)
+           maxSum=curSum;
+        if(curSum<0)
+           curSum=0;    
+      }
+   cout<< maxSum<<endl;
+    return 0;  
+}
+
