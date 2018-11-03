@@ -1,0 +1,42 @@
+
+struct ListNode {
+	int val;
+	struct ListNode next;
+	ListNode(int x) 
+			val(x), next(NULL) {
+	}
+};
+class Solution {
+public
+    ListNode FindKthToTail(ListNode pListHead, unsigned int k) {
+        思路想让快指针走k步，慢指针再和快指针一块走，注意要判断k的值是否合法
+       ListNode  fast=pListHead;
+         ListNode  slow=pListHead;
+        if(pListHead==nullptr)空表，则直接返回nullptr
+            return nullptr;
+        int i=0;
+           while(pListHead)计算链表的长度
+            {
+                pListHead=pListHead-next;
+                
+                i++;
+            }
+       if(ki)不合法的k 直接返回
+       return nullptr;
+        
+        while(k)先让快指针走k步
+        {
+           
+            fast=fast-next;
+             k--;
+        }
+        while(fast)一块走，快指针指向NULL，慢指针就是要求的值
+        {
+
+            fast=fast-next;
+            slow=slow-next;
+        }
+        return slow;
+    
+    }
+};
