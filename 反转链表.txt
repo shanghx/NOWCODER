@@ -1,0 +1,42 @@
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+//思路:1.先将链表中的每个节点放入栈中
+//    2.再从栈中取出来，细节很重要，记得每次新的链表要往后遍历是，最后新的链表的next置nullptr.
+//    3.最重要的一点就是判空，原链表是nullptr，如果不判空，死都跑不过   记住教训
+class Solution {
+public:
+	ListNode* ReverseList(ListNode* pHead) {
+        if(pHead==nullptr)
+            return nullptr;
+		//cout << pHead->val;
+		ListNode* pCur = pHead;
+		stack<ListNode*> s;
+		while (pCur)
+		{
+			s.push(pCur);
+
+			pCur = pCur->next;
+
+		}
+		ListNode* Head = s.top();
+		pCur = Head;
+		s.pop();
+		while (!s.empty())
+		{
+			pCur->next = s.top();
+			pCur = pCur->next;
+			s.pop();
+		}
+
+		pCur->next = nullptr;
+		return Head;
+		
+
+	}
+};
