@@ -1,0 +1,16 @@
+class Solution {
+public:
+     int  NumberOf1(int n) {
+         int count=32;
+         int i=0;
+         while(count)
+         {
+
+             if((n&1)==1)
+                 i++;
+             n>>=1;
+             count--;
+         }
+         return i;
+     }
+};
