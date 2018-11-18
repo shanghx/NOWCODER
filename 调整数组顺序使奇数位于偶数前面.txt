@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void reOrderArray(vector<int> &array) {
+        //思路：很暴力的删除 插入 但时间复杂度有点高
+        //每次遇到偶数元素就先保存下来 然后删掉他再把它插入到数组最后面
+        int size = array.size();
+        int i=0;
+         vector<int>::iterator it =array.begin();
+        int count=0;
+        vector<int>::iterator end =array.end();
+      for(it=array.begin(),i=0;i<size;i++)
+        {
+            if((*it)%2==0)
+            {
+                count=*it;
+                 it=array.erase(it);
+                array.push_back(count);
+                
+            }
+          else 
+            it++;
+        }
+        return ;
+    }
+};
