@@ -1,0 +1,52 @@
+/*
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};*/
+class Solution {
+public:
+    void Mirror(TreeNode *pRoot) {
+        
+        /*µ›πÈÀ„∑®*/
+      /*  if(pRoot==nullptr)
+            return ;
+        TreeNode* pTemp = nullptr;
+        
+        //Ωªªª◊Û”“◊” ˜
+        pTemp=pRoot->left;
+        pRoot->left=pRoot->right;
+        pRoot->right=pTemp;
+        
+        //µ›πÈΩªªª◊Û”“◊” ˜
+        
+        Mirror(pRoot->left);
+        Mirror(pRoot->right);
+    */
+    
+    /*∑«µ›πÈÀ„∑®*/
+        
+        stack<TreeNode*> s;
+         if(pRoot==nullptr)
+            return ;
+        TreeNode* pTemp = nullptr;
+        TreeNode* pCur = nullptr;
+        s.push(pRoot);
+        while(!s.empty())    
+        {
+            pCur=s.top();
+            pTemp=pCur->left;
+            s.pop();
+            pCur->left=pCur->right;
+            pCur->right=pTemp;
+            if(pCur->left!=nullptr)
+                s.push(pCur->left);
+            if(pCur->right!=nullptr)
+                s.push(pCur->right);
+        }
+        return ;
+    }
+};
