@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int Add(int num1, int num2)
+    {
+        int sum=0,cur=0;
+        do
+        {
+            sum=(num1^num2);
+            cur=(num1&num2)<<1;
+            num1=sum;
+            num2=cur;
+            
+        }
+        while(num2);
+            
+            return num1;
+
+    }
+};
