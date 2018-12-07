@@ -1,0 +1,17 @@
+class Solution {
+public:
+    string LeftRotateString(string str, int n) {
+        if (str == "") return {};
+        
+        int len = str.length();
+        int flag = n % len;
+        if (flag == 0) return str;
+        string roc1 = str.substr(0,flag);
+        //cout << roc1 << endl;
+        string rocs = str.substr(flag);
+        //cout << rocs << endl;
+        rocs.append(roc1);
+        return rocs;
+        
+    }
+};
