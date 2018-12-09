@@ -1,0 +1,44 @@
+/*
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+        val(x), next(NULL) {
+    }
+};
+*/
+class Solution {
+public:
+    ListNode* EntryNodeOfLoop(ListNode* pHead)
+    {
+        
+        /*如果链表为空，或者一个、两个节点，那么肯定不会构成环*/
+        if(pHead==nullptr||pHead->next==nullptr||pHead->next->next==nullptr)
+            return nullptr;
+        ListNode* pFast=pHead->next->next;
+        ListNode* pSlow=pHead->next;
+        /*先判断是否代带环*/
+       
+        while(pFast!=pSlow)
+        {
+
+            if((pFast->next->next)!=nullptr&&(pSlow->next)!= nullptr)
+            {
+                pFast=pFast->next->next;
+                pSlow=pSlow->next;
+            }
+            else 
+            {
+                return nullptr;
+            }
+        } 
+        /*此时已经找找到相遇点*/
+         pFast=pHead;
+         while(pFast!=pSlow)
+         {
+              pFast=pFast->next;
+              pSlow=pSlow->next;
+         }
+         return pSlow;
+    }
+};
