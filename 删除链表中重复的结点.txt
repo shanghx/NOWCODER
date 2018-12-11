@@ -11,24 +11,35 @@ class Solution {
 public:
     ListNode* deleteDuplication(ListNode* pHead)
     {
-       /* if(pHead==nullptr)
-            return nullptr;
-        ListNode* pCur=pHead;
-        ListNode* Head=pCur;
-        ListNode* pNext=pHead->next;
+        /*思路：
+            0.如果链表为空，或只有一个节点，直接返回
+            1.先开辟一个节点，让它指向pHead，目的是为了从第一个节点开始和下个节点依次比较
+            2.判断pNext和它的下个节点的值是否一样，如果一样，把当前pNext的节点删除，
+              并将pCur指向pNext的下一个的节点，并且flag置为1，
+              flag目的是为了区分此时pNext节点是否是重复的节点
+            3.如果pNext和它的下一个节相等，有两种情况，需要判断
+                如果flag==1，说明此时的pNext节点是和之前的节点重复，需要删除
+                如果flag==0，说明此时pNext的节点和之前的几节点不相等，只需让pCur和pNext向后走即可
+            4.直到pNext成为最后一个节点，此时循环跳出，此时还要判断flag是否等于1，如果等于1,
+                删除最后一个节点，否则直接返回头结点*/
+        if(pHead==nullptr||pHead->next==nullptr)
+            return pHead;
+        ListNode* pPre=new ListNode(-1);
+        ListNode* pCur=pPre;
+        pPre->next=pHead;
+        ListNode* pNext=pHead;
         ListNode* pTemp=nullptr;
         int flag=0;
         while(pNext->next!=nullptr)
         {
-            if(pNext!=pNext->next)
+            if(pNext->val!=pNext->next->val)
             {
                 if(flag==1)
                 {
                     pTemp=pNext;
                     pCur->next=pNext->next;
-                   
                     delete pTemp;
-                     pNext=pCur->next;
+                    pNext=pCur->next;
                     flag=0;
                 }
                 else
@@ -46,7 +57,16 @@ public:
                 flag=1;
             }
         }
-        return pHead;*/
+        if(flag==1)
+        {
+            pTemp=pNext; 
+            pCur->next=pNext->next;
+            delete pTemp;
+            pNext=pCur->next;
+        }
+        return pPre->next;
+    }
+    /*
          if(pHead==NULL||pHead->next==NULL) return pHead;
           else
           {
@@ -74,6 +94,5 @@ public:
               }
            return newHead->next;//返回头结点的下一个节点
                
-          }
-    }
+          }*/
 };
