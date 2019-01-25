@@ -1,0 +1,57 @@
+/*
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) :
+            val(x), left(NULL), right(NULL) {
+    }
+};
+*/
+//思路：用一个队列来保存下次要打印的节点
+//1.用low和high来记录当前层的节点数
+//2.每次插入完之后要把v清空
+class Solution {
+public:
+      vector<vector<int>> Print(TreeNode* pRoot) {
+
+		vector<vector<int>> vv;
+		vector<int> v;
+		
+		queue<TreeNode*> q;
+		TreeNode* cur = nullptr;
+		if (pRoot == nullptr)
+			return vv;
+		//先插入头节点
+		q.push(pRoot);
+		//用来保存每层的节点个数
+		int low =0, high = q.size();
+		//队列空遍历完毕
+		while (!q.empty())
+		{
+			//vector<int> v;不用clea清空v
+			//每次要更新节点数
+			low = 0; high = q.size();
+			//一层完，循环结束
+			while (low++ < high)
+			{
+				//取队头元素插入
+				cur = q.front();
+				v.push_back(cur->val);
+				//cout << cur->val << " ";
+				q.pop();//弹出
+					//接着按顺序把他的左右孩子入队
+				if (cur->left != nullptr)
+					q.push(cur->left);
+				if (cur->right != nullptr)
+					q.push(cur->right);
+			}
+			//cout << endl;
+			//插入到vv里面
+			vv.push_back(v);
+			//清空v里面的元素，后者在里面每次重新定义一个v，就不用clear
+			v.clear();	
+		}	
+		return vv;
+	}
+};
