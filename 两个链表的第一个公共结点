@@ -1,0 +1,63 @@
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+class Solution {
+public:
+    ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) {
+        ListNode* cur1=pHead1;
+        ListNode* cur2=pHead2;
+        //如果有一个链表是空，返回空
+        if(cur1==nullptr||cur2==nullptr)
+            return nullptr;
+        //如果链表头相等，返回其中一个节点
+        if(cur1==cur2)
+            return cur1;
+        //先计算两个链表的长度
+        int count1=0,count2=0;
+        while(cur1!=nullptr)
+        {
+            count1++;
+            cur1=cur1->next;
+        }
+          while(cur2!=nullptr)
+        {
+            count2++;
+            cur2=cur2->next;
+        }
+        
+        //让长的链表多走tmp步，然后一起走
+        int tmp=count1-count2;
+        cur1=pHead1;
+        cur2=pHead2;
+        if(tmp<0)
+        {
+            while(tmp++)
+            {
+                cur2=cur2->next;
+            }
+        }
+        else if(tmp>0)
+        {
+            while(tmp--)
+            {
+                cur1=cur1->next;
+            }
+        }
+        //一起走
+        while((cur1!=cur2)&&(cur1!=nullptr)&&(cur2!=nullptr))
+        {
+            cur1=cur1->next;
+            cur2=cur2->next;
+        }
+        //相等则是交点
+        if(cur1==cur2)
+            return cur1;
+        else
+            return nullptr;
+    }
+};
