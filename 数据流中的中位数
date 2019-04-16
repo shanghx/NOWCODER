@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> v;
+    void Insert(int num)
+    {
+        v.push_back(num);
+    }
+
+    double GetMedian()
+    { 
+        sort(v.begin(),v.end());
+        double ret;
+        if(v.size()%2==0)
+        {
+            ret=(v[v.size()/2-1]+v[v.size()/2])/2.0;
+            return ret;
+        }
+        else
+        {
+            ret=v[v.size()/2]*1.0;
+            return ret;
+        }
+    }
+
+};
